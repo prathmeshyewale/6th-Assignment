@@ -1,0 +1,115 @@
+ MySQL  localhost:3306 ssl  seriesdb  SQL > CREATE TABLE series (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(256), genre INT NOT NULL,director INT NOT NULL, country INT NOT NULL, year_of_release DATE,year_of_end Date,PRIMARY KEY(id));
+Query OK, 0 rows affected (0.6769 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe series;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| id              | int          | NO   | PRI | NULL    | auto_increment |
+| name            | varchar(256) | YES  |     | NULL    |                |
+| genre           | int          | NO   |     | NULL    |                |
+| director        | int          | NO   |     | NULL    |                |
+| country         | int          | NO   |     | NULL    |                |
+| year_of_release | date         | YES  |     | NULL    |                |
+| year_of_end     | date         | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.2745 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values ('MA');
+Query OK, 1 row affected (0.1621 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values ('UI');
+Query OK, 1 row affected (0.1828 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values ('ST ');
+Query OK, 1 row affected (0.0812 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values ('CS ');
+Query OK, 1 row affected (0.1927 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values ('JN');
+Query OK, 1 row affected (0.1440 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values (' N');
+Query OK, 1 row affected (0.1392 sec
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values ('CBUS);
+                                         '>
+                                         '> insert into director(name) values ('TIN');
+                                       
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe table director;
+ERROR: 2013 (HY000): Lost connection to MySQL server during query
+The global session got disconnected..
+Attempting to reconnect to 'mysql://root@localhost:3306/Seriesdb'..
+The global session was successfully reconnected.
+ MySQL  localhost:3306 ssl  seriesdb  SQL > \connect root@localhost:3306
+Creating a session to 'root@localhost:3306'
+Fetching schema names for autocompletion... Press ^C to stop.
+Closing old connection...
+Your MySQL connection id is 20
+Server version: 8.0.26 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| seriesdb           |
+| sys                |
++--------------------+
+5 rows in set (0.0021 sec)
+ MySQL  localhost:3306 ssl  SQL > show seriesdb;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'seriesdb' at line 1
+ MySQL  localhost:3306 ssl  SQL > use seriesdb;
+Default schema set to `seriesdb`.
+Fetching table and column names from `seriesdb` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe table director;
++----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table    | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | director | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    6 |      100 | NULL  |
++----+-------------+----------+------------+------+---------------+------+---------+------+------+----------+-------+
+1 row in set, 1 warning (0.0418 sec)
+Note (code 1003): /* select#1 */ select `seriesdb`.`director`.`id` AS `id`,`seriesdb`.`director`.`name` AS `name` from `seriesdb`.`director`
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select*from genre;
+Empty set (0.1438 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe table genre;
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | genre | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    1 |      100 | NULL  |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+1 row in set, 1 warning (0.0016 sec)
+Note (code 1003): /* select#1 */ select `seriesdb`.`genre`.`id` AS `id`,`seriesdb`.`genre`.`name` AS `name` from `seriesdb`.`genre`
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into genre(name) values ('Duffer Brothers');
+Query OK, 1 row affected (0.0905 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select*from genre;
++----+-----------------+
+| id | name            |
++----+-----------------+
+|  1 | Duffer Brothers |
++----+-----------------+
+1 row in set (0.0018 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into genre(name) values('Suparn Varma');
+Query OK, 1 row affected (0.1271 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into genre(name) values('David Crane');
+Query OK, 1 row affected (0.1361 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into genre(name) values('Baran bo Odar');
+Query OK, 1 row affected (0.1861 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > select*from genre;
++----+-----------------+
+| id | name            |
++----+-----------------+
+|  1 | Duffer Brothers |
+|  2 | Suparn Varma    |
+|  3 | David Crane     |
+|  4 | Baran bo Odar   |
++----+-----------------+
+4 rows in set (0.0021 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > truncate table genre;
+Query OK, 0 rows affected (1.8427 sec)
+ MySQL  localhost:3306 ssl  seriesdb  SQL > describe table genre;
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | genre | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    1 |      100 | NULL  |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+1 row in set, 1 warning (0.1439 sec)
+Note (code 1003): /* select#1 */ select `seriesdb`.`genre`.`id` AS `id`,`seriesdb`.`genre`.`name` AS `name` from `seriesdb`.`genre`
+ MySQL  localhost:3306 ssl  seriesdb  SQL > insert into director(name) values('James Burrows');
+ERROR: 2013 (HY000): Lost connection to MySQL server during query
+The global session got disconnected..
